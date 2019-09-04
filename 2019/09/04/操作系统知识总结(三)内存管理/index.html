@@ -54,18 +54,21 @@
   };
 </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="将最近学习内存的知识，整理下！">
+<meta name="keywords" content="内存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/08/23/hello-world/index.html">
+<meta property="og:title" content="操作系统知识总结(三)内存管理">
+<meta property="og:url" content="http://yoursite.com/2019/09/04/操作系统知识总结(三)内存管理/index.html">
 <meta property="og:site_name" content="justn0w的Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="将最近学习内存的知识，整理下！">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-22T20:08:38.285Z">
+<meta property="og:image" content="http://yoursite.com/img/存储器多层结构.png">
+<meta property="og:updated_time" content="2019-09-04T05:57:03.754Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-  <link rel="canonical" href="http://yoursite.com/2019/08/23/hello-world/">
+<meta name="twitter:title" content="操作系统知识总结(三)内存管理">
+<meta name="twitter:description" content="将最近学习内存的知识，整理下！">
+<meta name="twitter:image" content="http://yoursite.com/img/存储器多层结构.png">
+  <link rel="canonical" href="http://yoursite.com/2019/09/04/操作系统知识总结(三)内存管理/">
 
 
 <script id="page-configurations">
@@ -79,7 +82,7 @@
   };
 </script>
 
-  <title>Hello World | justn0w的Blog</title>
+  <title>操作系统知识总结(三)内存管理 | justn0w的Blog</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -224,7 +227,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/23/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/04/操作系统知识总结(三)内存管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="justnow">
@@ -236,7 +239,7 @@
       <meta itemprop="name" content="justn0w的Blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Hello World
+        <h1 class="post-title" itemprop="name headline">操作系统知识总结(三)内存管理
 
           
         </h1>
@@ -252,8 +255,12 @@
                 
               
 
-              <time title="创建时间：2019-08-23 04:08:38" itemprop="dateCreated datePublished" datetime="2019-08-23T04:08:38+08:00">2019-08-23</time>
+              <time title="创建时间：2019-09-04 11:13:57 / 修改时间：13:57:03" itemprop="dateCreated datePublished" datetime="2019-09-04T11:13:57+08:00">2019-09-04</time>
             </span>
+          
+            
+
+            
           
 
           
@@ -267,20 +274,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>将最近学习内存的知识，整理下！</p>
+<a id="more"></a>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h1 id="0x01-存储器的层次结构"><a href="#0x01-存储器的层次结构" class="headerlink" title="0x01 存储器的层次结构"></a>0x01 存储器的层次结构</h1><h2 id="1-存储器的多层结构"><a href="#1-存储器的多层结构" class="headerlink" title="1 存储器的多层结构"></a>1 存储器的多层结构</h2><p>存储层次至少应具有三级：最高层为CPU寄存器，中间为主存，最底层是辅存。具体可以分为下图</p>
+<img src="/img/存储器多层结构.png">
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+<p>上图中，主存储器简称为内存或者主存，是计算机系统中的主要部件，用于保存进程运行时的程序和数据，也称可执行存储器。</p>
+<p>在存储层次中，层次越高（越靠近CPU），存储介质的访问速度越快，价格也越高，相对所配置存储器的存储容量也越小。</p>
+<h2 id="2-可执行存储器"><a href="#2-可执行存储器" class="headerlink" title="2 可执行存储器"></a>2 可执行存储器</h2><p>寄存器和主存储器又被称为可执行存储器。进程可以在很少的始终周期内使用一条load或者store指令对可执行存储器进行访问。但对辅存的访问则需要通过I/O设备实现。因此，在访问中将涉及到中断、设备驱动程序以及物理设备的运行。所需耗费的时间远远高于访问可执行存储器的时间，一般相差3个数量级甚至更多。</p>
+<h2 id="3-各个"><a href="#3-各个" class="headerlink" title="3 各个"></a>3 各个</h2>
     </div>
 
     
@@ -290,21 +293,30 @@
       
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/内存/" rel="tag"># 内存</a>
+            
+          </div>
+        
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
+                <a href="/2019/08/28/操作系统知识总结(二)地址空间/" rel="next" title="操作系统知识总结(二)地址空间">
+                  <i class="fa fa-chevron-left"></i> 操作系统知识总结(二)地址空间
+                </a>
+              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/08/24/first/" rel="prev" title="first">
-                  first <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -353,7 +365,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-存储器的层次结构"><span class="nav-number">1.</span> <span class="nav-text">0x01 存储器的层次结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-存储器的多层结构"><span class="nav-number">1.1.</span> <span class="nav-text">1 存储器的多层结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-可执行存储器"><span class="nav-number">1.2.</span> <span class="nav-text">2 可执行存储器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-各个"><span class="nav-number">1.3.</span> <span class="nav-text">3 各个</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -386,9 +398,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

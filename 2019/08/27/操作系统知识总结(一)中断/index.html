@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="justn0w的Blog">
 <meta property="og:description" content="每次遇到中断的时候都要翻一下课本，看来还是没有彻底的理解。现在总结下！">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-27T06:02:33.222Z">
+<meta property="og:updated_time" content="2019-08-28T03:29:46.687Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识总结(一)中断">
 <meta name="twitter:description" content="每次遇到中断的时候都要翻一下课本，看来还是没有彻底的理解。现在总结下！">
@@ -253,11 +253,19 @@
                 
               
 
-              <time title="创建时间：2019-08-27 03:06:54 / 修改时间：14:02:33" itemprop="dateCreated datePublished" datetime="2019-08-27T03:06:54+08:00">2019-08-27</time>
+              <time title="创建时间：2019-08-27 03:06:54" itemprop="dateCreated datePublished" datetime="2019-08-27T03:06:54+08:00">2019-08-27</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 11:29:46" itemprop="dateModified" datetime="2019-08-28T11:29:46+08:00">2019-08-28</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -297,7 +305,7 @@
 <li>进程之间的<code>切换</code>是通过中断来完成的</li>
 <li>提高处理机的利用率和实现CPU与I/O设备并行执行，也必须有中断的支持</li>
 </ul>
-<h1 id="0x03-中断处理程序"><a href="#0x03-中断处理程序" class="headerlink" title="0x03 中断处理程序"></a>0x03 中断处理程序</h1><p>以字符设备的读操作为例：<br>当该设备读入了一个字符数据，并已放入数据寄存器中。此时，设备控制器向便向处理机发送一个中断请求信号，请求CPU将设备已读入的数据传送到内存的缓冲区。然后，CPU停止正在执行的进程，并且保留当前执行进程的CPU环境，由设备的中断处理程序将该数据传送给CPU，再将它存入内存的缓存中。当中断处理完成以后，恢复之前停止的进程</p>
+<h1 id="0x03-中断处理程序"><a href="#0x03-中断处理程序" class="headerlink" title="0x03 中断处理程序"></a>0x03 中断处理程序</h1><p>以字符设备的读操作为例：<br>当该设备读入了一个字符数据，并已放入数据寄存器中。此时，设备控制器便向处理机发送一个中断请求信号，请求CPU将设备已读入的数据传送到内存的缓冲区。然后，CPU停止正在执行的进程，并且保留当前执行进程的CPU环境，由设备的中断处理程序将该数据传送给CPU，再将它存入内存的缓存中。当中断处理完成以后，恢复之前停止的进程</p>
 
     </div>
 
@@ -323,15 +331,15 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/08/24/first/" rel="next" title="first">
-                  <i class="fa fa-chevron-left"></i> first
-                </a>
-              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/28/操作系统知识总结(二)地址空间/" rel="prev" title="操作系统知识总结(二)地址空间">
+                  操作系统知识总结(二)地址空间 <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -413,9 +421,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

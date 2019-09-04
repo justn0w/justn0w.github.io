@@ -54,17 +54,22 @@
   };
 </script>
 
-  <meta name="description" content="学习·生活·记录">
-<meta property="og:type" content="website">
-<meta property="og:title" content="justn0w的Blog">
-<meta property="og:url" content="http://yoursite.com/categories/日常/index.html">
+  <meta name="description" content="进程的地址空间(Process Address Space)是指进程可以寻址的虚拟地址空间。">
+<meta name="keywords" content="内存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统知识总结(二)地址空间">
+<meta property="og:url" content="http://yoursite.com/2019/08/28/操作系统知识总结(二)地址空间/index.html">
 <meta property="og:site_name" content="justn0w的Blog">
-<meta property="og:description" content="学习·生活·记录">
+<meta property="og:description" content="进程的地址空间(Process Address Space)是指进程可以寻址的虚拟地址空间。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/img/CPU虚拟内存地址.png">
+<meta property="og:image" content="http://yoursite.com/img/OS逻辑地址.png">
+<meta property="og:updated_time" content="2019-09-04T03:05:37.034Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="justn0w的Blog">
-<meta name="twitter:description" content="学习·生活·记录">
-  <link rel="canonical" href="http://yoursite.com/categories/日常/">
+<meta name="twitter:title" content="操作系统知识总结(二)地址空间">
+<meta name="twitter:description" content="进程的地址空间(Process Address Space)是指进程可以寻址的虚拟地址空间。">
+<meta name="twitter:image" content="http://yoursite.com/img/CPU虚拟内存地址.png">
+  <link rel="canonical" href="http://yoursite.com/2019/08/28/操作系统知识总结(二)地址空间/">
 
 
 <script id="page-configurations">
@@ -72,13 +77,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>分类: 日常 | justn0w的Blog</title>
+  <title>操作系统知识总结(二)地址空间 | justn0w的Blog</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -205,27 +210,6 @@
 
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 </nav>
 </div>
     </header>
@@ -233,65 +217,153 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content ">
+          <div id="content" class="content page-post-detail">
             
 
-  
-  
-  
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">日常<small>分类</small>
-        </h1>
-      </div>
-
-      
-
-  
-  
-
-  
+  <div id="posts" class="posts-expand">
     
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-  
 
   <article class="post" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/28/操作系统知识总结(二)地址空间/">
 
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/08/24/first/" itemprop="url">
-            <span itemprop="name">first</span>
-          </a>
-        
-      </h2>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="justnow">
+      <meta itemprop="description" content="学习·生活·记录">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-24T13:52:52+08:00"
-              content="2019-08-24">
-          08-24
-        </time>
-      </div>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="justn0w的Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">操作系统知识总结(二)地址空间
 
-    </header>
-  </article>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-28 11:42:22" itemprop="dateCreated datePublished" datetime="2019-08-28T11:42:22+08:00">2019-08-28</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-04 11:05:37" itemprop="dateModified" datetime="2019-09-04T11:05:37+08:00">2019-09-04</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>进程的地址空间(Process Address Space)是指进程可以寻址的虚拟地址空间。</p>
+<a id="more"></a>
 
 
+<p>进程地址空间(Process Address Space)是指进程可寻址的虚拟地址空间。在32位的处理器中，进程可以寻址的4GB的地址空间，但是进程没有权限去寻址内核空间的虚拟地址，只能通过系统调用的方式间接的访问。</p>
+<h2 id="1-为什么32位的处理器，进程可以寻址4GB的地址空间？"><a href="#1-为什么32位的处理器，进程可以寻址4GB的地址空间？" class="headerlink" title="1 为什么32位的处理器，进程可以寻址4GB的地址空间？"></a>1 为什么32位的处理器，进程可以寻址4GB的地址空间？</h2><p>(1) 什么是地址空间？<br>一个CPU的地址总线宽度为10，那么可以寻址2^10 (1024)个内存单元，1个内存单元的大小为1个字节，所以这个CPU的内存地址空间为2^10 B,即1KB大小。<br>所以，如果说32位的CPU的地址总线宽度为32的话，那么其地址空间大小为：2^32 (4K)个内存单元，所以这个CPU的内存地址空间为4KB</p>
+<p>(2) 操作系统的位数和CPU的位数区别</p>
+<h4 id="32位的CPU，内存空间地址"><a href="#32位的CPU，内存空间地址" class="headerlink" title="32位的CPU，内存空间地址"></a>32位的CPU，内存空间地址</h4><img src="/img/CPU虚拟内存地址.png">
+
+<h4 id="32位的操作系统，逻辑地址"><a href="#32位的操作系统，逻辑地址" class="headerlink" title="32位的操作系统，逻辑地址"></a>32位的操作系统，逻辑地址</h4><p>对于逻辑地址为32的操作系统，其逻辑地址编码采用的地址位数是32位的，所以，其逻辑地址的寻址范围是4GB。而在intel x86架构下，采用的是内存映射技术(Memory-Mapped I/O, MMIO)，也就说将4GB逻辑地址中一部分要划分出来与BIOS ROM、CPU寄存器、I/O设备这些部件的物理地址进行映射，那么逻辑地址中能够与内存条的物理地址进行映射的空间肯定没有4GB了，看下面这幅图就明白了</p>
+<img src="/img/OS逻辑地址.png">
+
+<p>所以，日常使用中，整个内存条物理地址，并没有被完全使用！</p>
+<p>参考文章：</p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/dolphin0520/archive/2013/05/31/3110555.html" target="_blank" rel="noopener">https://www.cnblogs.com/dolphin0520/archive/2013/05/31/3110555.html</a></p>
+</blockquote>
 
     </div>
 
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/内存/" rel="tag"># 内存</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/27/操作系统知识总结(一)中断/" rel="next" title="操作系统知识总结(一)中断">
+                  <i class="fa fa-chevron-left"></i> 操作系统知识总结(一)中断
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/04/操作系统知识总结(三)内存管理/" rel="prev" title="操作系统知识总结(三)内存管理">
+                  操作系统知识总结(三)内存管理 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
   </div>
   
   
   
+  </article>
 
-  
-
+  </div>
 
 
           </div>
@@ -310,6 +382,11 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc" data-target="post-toc-wrap">
@@ -322,6 +399,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-为什么32位的处理器，进程可以寻址4GB的地址空间？"><span class="nav-number">1.</span> <span class="nav-text">1 为什么32位的处理器，进程可以寻址4GB的地址空间？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#32位的CPU，内存空间地址"><span class="nav-number">1.0.1.</span> <span class="nav-text">32位的CPU，内存空间地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32位的操作系统，逻辑地址"><span class="nav-number">1.0.2.</span> <span class="nav-text">32位的操作系统，逻辑地址</span></a></li></ol></li></ol></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -353,9 +432,7 @@
         
           
         
-          
-        
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
