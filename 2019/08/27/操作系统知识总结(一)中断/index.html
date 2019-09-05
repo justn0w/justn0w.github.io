@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="justn0w的Blog">
 <meta property="og:description" content="每次遇到中断的时候都要翻一下课本，看来还是没有彻底的理解。现在总结下！">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-05T05:00:21.662Z">
+<meta property="og:updated_time" content="2019-09-05T06:00:02.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统知识总结(一)中断">
 <meta name="twitter:description" content="每次遇到中断的时候都要翻一下课本，看来还是没有彻底的理解。现在总结下！">
@@ -264,7 +264,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-05 13:00:21" itemprop="dateModified" datetime="2019-09-05T13:00:21+08:00">2019-09-05</time>
+                <time title="修改时间：2019-09-05 14:00:02" itemprop="dateModified" datetime="2019-09-05T14:00:02+08:00">2019-09-05</time>
               </span>
             
           
@@ -299,14 +299,14 @@
 <h4 id="0x01-什么是中断"><a href="#0x01-什么是中断" class="headerlink" title="0x01 什么是中断"></a>0x01 什么是中断</h4><blockquote>
 <p>中断是指:CPU对I/O设备发来的中断信号的一种响应。CPU暂停正在执行的程序，保留CPU环境后，自动地转去执行该I/O设备的中断处理程序。执行完成后，再回到断点，继续执行原来的程序。I/O设备可以是字符设备，也可以是块设备、通信设备等。由于中断是由外部设备引起的，故又称外中断。 —— 《计算机操作系统》（第四版，汤小丹）</p>
 </blockquote>
-<p>举个例子：你正在吃饭，突然接了个电话。这时候，你就会把筷子放下，转而去接电话。当接完电话后，再继续拿起筷子，完成吃饭这个行为。</p>
-<p>这里可以把<code>&quot;你&quot;</code>当作CPU。</p>
+<p>&emsp;&emsp;举个例子：你正在吃饭，突然接了个电话。这时候，你就会把筷子放下，转而去接电话。当接完电话后，再继续拿起筷子，完成吃饭这个行为。</p>
+<p>&emsp;&emsp;这里可以把<code>&quot;你&quot;</code>当作CPU。</p>
 <h4 id="0x02-中断的作用"><a href="#0x02-中断的作用" class="headerlink" title="0x02 中断的作用"></a>0x02 中断的作用</h4><ul>
 <li>进程之间的<code>切换</code>是通过中断来完成的</li>
 <li>提高处理机的利用率和实现CPU与I/O设备并行执行，也必须有中断的支持</li>
 </ul>
-<h4 id="0x03-中断处理程序"><a href="#0x03-中断处理程序" class="headerlink" title="0x03 中断处理程序"></a>0x03 中断处理程序</h4><p>以字符设备的读操作为例：<br>当该设备读入了一个字符数据，并已放入数据寄存器中。此时，设备控制器便向处理机发送一个中断请求信号，请求CPU将设备已读入的数据传送到内存的缓冲区。然后，CPU停止正在执行的进程，并且保留当前执行进程的CPU环境，由设备的中断处理程序将该数据传送给CPU，再将它存入内存的缓存中。当中断处理完成以后，恢复之前停止的进程。</p>
-<h4 id="0x04-一个实际的例子"><a href="#0x04-一个实际的例子" class="headerlink" title="0x04 一个实际的例子"></a>0x04 一个实际的例子</h4><p>假设一个</p>
+<h4 id="0x03-中断处理程序"><a href="#0x03-中断处理程序" class="headerlink" title="0x03 中断处理程序"></a>0x03 中断处理程序</h4><p>&emsp;&emsp;以字符设备的读操作为例：<br>&emsp;&emsp;当该设备读入了一个字符数据，并已放入数据寄存器中。此时，设备控制器便向处理机发送一个中断请求信号，请求CPU将设备已读入的数据传送到内存的缓冲区。然后，CPU停止正在执行的进程，并且保留当前执行进程的CPU环境，由设备的中断处理程序将该数据传送给CPU，再将它存入内存的缓存中。当中断处理完成以后，恢复之前停止的进程。</p>
+<h4 id="0x04-一个实际的例子"><a href="#0x04-一个实际的例子" class="headerlink" title="0x04 一个实际的例子"></a>0x04 一个实际的例子</h4><p>&emsp;&emsp;假设现在处理器需要去获取一个键盘的事件，如果处理器发出一个请求信号之后一直在轮询键盘的响应，由于键盘响应速度比处理器慢得多并且等待用户输入，那么处理器是很浪费资源的。与其这样，不如键盘有事件发生时发生一个信号给处理器，让处理器暂停当前的工作来处理这个响应，这比处理器一直在轮询效率要高，这就是中断管理机制产生的背景。</p>
 
     </div>
 
