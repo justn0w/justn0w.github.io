@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="mysql必知必会，读书笔记！">
+<meta name="keywords" content="sql基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql学习知识汇总01">
+<meta property="og:url" content="http://yoursite.com/2019/09/09/sql学习知识汇总01/index.html">
+<meta property="og:site_name" content="justn0w的Blog">
+<meta property="og:description" content="mysql必知必会，读书笔记！">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-11T05:59:38.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sql学习知识汇总01">
+<meta name="twitter:description" content="mysql必知必会，读书笔记！">
+  <link rel="canonical" href="http://yoursite.com/2019/09/09/sql学习知识汇总01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>sql学习知识汇总01 | justn0w的Blog</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">justn0w的Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/09/sql学习知识汇总01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="justnow">
+      <meta itemprop="description" content="学习·生活·记录">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="justn0w的Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">sql学习知识汇总01
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-09 11:39:43" itemprop="dateCreated datePublished" datetime="2019-09-09T11:39:43+08:00">2019-09-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-11 13:59:38" itemprop="dateModified" datetime="2019-09-11T13:59:38+08:00">2019-09-11</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>mysql必知必会，读书笔记！</p>
+<a id="more"></a>
+
+<p>[toc]</p>
+<hr>
+<p>建表语句：<a href="/download/sql学习知识总结/create.sql">create.sql</a><br>插入数据：<a href="/download/sql学习知识总结/populate.sql">populate.sql</a><br>数据库名字：learnmysql</p>
+<h4 id="0x01-检索数据"><a href="#0x01-检索数据" class="headerlink" title="0x01 检索数据"></a>0x01 检索数据</h4><h5 id="1-1-检索不同的行，即输出的子段不重复"><a href="#1-1-检索不同的行，即输出的子段不重复" class="headerlink" title="1.1 检索不同的行，即输出的子段不重复"></a>1.1 检索不同的行，即输出的子段不重复</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> 字段名 <span class="keyword">from</span> 表名;</span><br></pre></td></tr></table></figure>
+
+<p>现有表：t_user</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+<span class="comment">----+----------+----------+</span></span><br><span class="line">| id | username | password |</span><br><span class="line">+<span class="comment">----+----------+----------+</span></span><br><span class="line">|  1 | jack     | 520      |</span><br><span class="line">|  2 | rose     | 521      |</span><br><span class="line">|  3 | justnow  | 123      |</span><br><span class="line">|  4 | justnow  | 123      |</span><br><span class="line">|  5 | justnow  | 123      |</span><br><span class="line">|  6 | justnow  | 123      |</span><br><span class="line">|  7 | justnow  | 123      |</span><br><span class="line">|  8 | justnow  | 123      |</span><br><span class="line">|  9 | justnow  | 123      |</span><br><span class="line">+<span class="comment">----+----------+----------+</span></span><br></pre></td></tr></table></figure>
+
+<p>查找username列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username <span class="keyword">from</span> t_user;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| username |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| jack     |</span><br><span class="line">| rose     |</span><br><span class="line">| justnow  |</span><br><span class="line">| justnow  |</span><br><span class="line">| justnow  |</span><br><span class="line">| justnow  |</span><br><span class="line">| justnow  |</span><br><span class="line">| justnow  |</span><br><span class="line">| justnow  |</span><br><span class="line">+<span class="comment">----------+</span></span><br></pre></td></tr></table></figure>
+
+<p>不重复的查找username列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> username <span class="keyword">from</span> t_user;</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| username |</span><br><span class="line">+<span class="comment">----------+</span></span><br><span class="line">| jack     |</span><br><span class="line">| rose     |</span><br><span class="line">| justnow  |</span><br><span class="line">+<span class="comment">----------+</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="1-2-限制结果"><a href="#1-2-限制结果" class="headerlink" title="1.2 限制结果"></a>1.2 限制结果</h5><ul>
+<li>限制行数<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> 表名 <span class="keyword">limit</span> m,n;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>(1) 如果limit后面只有一个数字m的话，表明查找前m行<br>如：检索前5行的内容</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_user <span class="keyword">limit</span> <span class="number">5</span>;</span><br><span class="line">+<span class="comment">----+----------+----------+</span></span><br><span class="line">| id | username | password |</span><br><span class="line">+<span class="comment">----+----------+----------+</span></span><br><span class="line">|  1 | jack     | 520      |</span><br><span class="line">|  2 | rose     | 521      |</span><br><span class="line">|  3 | justnow  | 123      |</span><br><span class="line">|  4 | justnow  | 123      |</span><br><span class="line">|  5 | justnow  | 123      |</span><br><span class="line">+<span class="comment">----+----------+----------+</span></span><br></pre></td></tr></table></figure>
+
+<p>(2) 如果limit后面有两个数字m,n的话，表明查找第m行后面的n行<br>如：检索第5行后面的2行</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t_user <span class="keyword">limit</span> <span class="number">5</span>,<span class="number">2</span>;</span><br><span class="line">+<span class="comment">----+----------+----------+</span></span><br><span class="line">| id | username | password |</span><br><span class="line">+<span class="comment">----+----------+----------+</span></span><br><span class="line">|  6 | justnow  | 123      |</span><br><span class="line">|  7 | justnow  | 123      |</span><br><span class="line">+<span class="comment">----+----------+----------+</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="1-3-使用完全限定的表名"><a href="#1-3-使用完全限定的表名" class="headerlink" title="1.3 使用完全限定的表名"></a>1.3 使用完全限定的表名</h5><p>即：表名.列名来引用列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> t_user.id, t_user.password <span class="keyword">from</span> t_user;</span><br><span class="line">+<span class="comment">----+----------+</span></span><br><span class="line">| id | password |</span><br><span class="line">+<span class="comment">----+----------+</span></span><br><span class="line">|  1 | 520      |</span><br><span class="line">|  2 | 521      |</span><br><span class="line">|  3 | 123      |</span><br><span class="line">|  4 | 123      |</span><br><span class="line">|  5 | 123      |</span><br><span class="line">|  6 | 123      |</span><br><span class="line">|  7 | 123      |</span><br><span class="line">|  8 | 123      |</span><br><span class="line">|  9 | 123      |</span><br><span class="line">+<span class="comment">----+----------+</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="0x02-排序检索数据"><a href="#0x02-排序检索数据" class="headerlink" title="0x02 排序检索数据"></a>0x02 排序检索数据</h4><h5 id="2-1-排序数据"><a href="#2-1-排序数据" class="headerlink" title="2.1 排序数据"></a>2.1 排序数据</h5><p>使用order by子句，使用order by子句取一个或多个列的名子，据此对输出进行排序。<br>未排序前：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name <span class="keyword">from</span> products;</span><br><span class="line">+<span class="comment">----------------+</span></span><br><span class="line">| prod_name      |</span><br><span class="line">+<span class="comment">----------------+</span></span><br><span class="line">| .5 ton anvil   |</span><br><span class="line">| 1 ton anvil    |</span><br><span class="line">| 2 ton anvil    |</span><br><span class="line">| Detonator      |</span><br><span class="line">| Bird seed      |</span><br><span class="line">| Carrots        |</span><br><span class="line">| Fuses          |</span><br><span class="line">| JetPack 1000   |</span><br><span class="line">| JetPack 2000   |</span><br><span class="line">| Oil can        |</span><br><span class="line">| Safe           |</span><br><span class="line">| Sling          |</span><br><span class="line">| TNT (1 stick)  |</span><br><span class="line">| TNT (5 sticks) |</span><br><span class="line">+<span class="comment">----------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>使用order by子句后：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name <span class="keyword">from</span> products <span class="keyword">order</span> <span class="keyword">by</span> prod_name;</span><br><span class="line">+<span class="comment">----------------+</span></span><br><span class="line">| prod_name      |</span><br><span class="line">+<span class="comment">----------------+</span></span><br><span class="line">| .5 ton anvil   |</span><br><span class="line">| 1 ton anvil    |</span><br><span class="line">| 2 ton anvil    |</span><br><span class="line">| Bird seed      |</span><br><span class="line">| Carrots        |</span><br><span class="line">| Detonator      |</span><br><span class="line">| Fuses          |</span><br><span class="line">| JetPack 1000   |</span><br><span class="line">| JetPack 2000   |</span><br><span class="line">| Oil can        |</span><br><span class="line">| Safe           |</span><br><span class="line">| Sling          |</span><br><span class="line">| TNT (1 stick)  |</span><br><span class="line">| TNT (5 sticks) |</span><br><span class="line">+<span class="comment">----------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>与没有使用order by子句对比，可以看出，结果会根据子母和数字进行排序。</p>
+<h5 id="2-2-按照多个列排序"><a href="#2-2-按照多个列排序" class="headerlink" title="2.2 按照多个列排序"></a>2.2 按照多个列排序</h5><p>如果产品的价格相同，但是名字不同，这时候可以使用多个列排序的方法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_id, prod_price, prod_name <span class="keyword">from</span> products <span class="keyword">order</span> <span class="keyword">by</span> prod_price, prod_name;</span><br><span class="line">+<span class="comment">---------+------------+----------------+</span></span><br><span class="line">| prod_id | prod_price | prod_name      |</span><br><span class="line">+<span class="comment">---------+------------+----------------+</span></span><br><span class="line">| FC      |       2.50 | Carrots        |</span><br><span class="line">| TNT1    |       2.50 | TNT (1 stick)  |</span><br><span class="line">| FU1     |       3.42 | Fuses          |</span><br><span class="line">| SLING   |       4.49 | Sling          |</span><br><span class="line">| ANV01   |       5.99 | .5 ton anvil   |</span><br><span class="line">| OL1     |       8.99 | Oil can        |</span><br><span class="line">| ANV02   |       9.99 | 1 ton anvil    |</span><br><span class="line">| FB      |      10.00 | Bird seed      |</span><br><span class="line">| TNT2    |      10.00 | TNT (5 sticks) |</span><br><span class="line">| DTNTR   |      13.00 | Detonator      |</span><br><span class="line">| ANV03   |      14.99 | 2 ton anvil    |</span><br><span class="line">| JP1000  |      35.00 | JetPack 1000   |</span><br><span class="line">| SAFE    |      50.00 | Safe           |</span><br><span class="line">| JP2000  |      55.00 | JetPack 2000   |</span><br><span class="line">+<span class="comment">---------+------------+----------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：仅在多个行具有相同的prod_price值时才对产品按prod_name进行排序。如果prod_price列中所有的值都是唯一的，则不会按prod_name排序</p>
+<h5 id="2-3-指定排序方向"><a href="#2-3-指定排序方向" class="headerlink" title="2.3 指定排序方向"></a>2.3 指定排序方向</h5><p>按价格以降序排序产品(最贵的排在最前面):</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_id, prod_price, prod_name <span class="keyword">from</span> products <span class="keyword">order</span> <span class="keyword">by</span> prod_price <span class="keyword">DESC</span>;</span><br><span class="line">+<span class="comment">---------+------------+----------------+</span></span><br><span class="line">| prod_id | prod_price | prod_name      |</span><br><span class="line">+<span class="comment">---------+------------+----------------+</span></span><br><span class="line">| JP2000  |      55.00 | JetPack 2000   |</span><br><span class="line">| SAFE    |      50.00 | Safe           |</span><br><span class="line">| JP1000  |      35.00 | JetPack 1000   |</span><br><span class="line">| ANV03   |      14.99 | 2 ton anvil    |</span><br><span class="line">| DTNTR   |      13.00 | Detonator      |</span><br><span class="line">| TNT2    |      10.00 | TNT (5 sticks) |</span><br><span class="line">| FB      |      10.00 | Bird seed      |</span><br><span class="line">| ANV02   |       9.99 | 1 ton anvil    |</span><br><span class="line">| OL1     |       8.99 | Oil can        |</span><br><span class="line">| ANV01   |       5.99 | .5 ton anvil   |</span><br><span class="line">| SLING   |       4.49 | Sling          |</span><br><span class="line">| FU1     |       3.42 | Fuses          |</span><br><span class="line">| FC      |       2.50 | Carrots        |</span><br><span class="line">| TNT1    |       2.50 | TNT (1 stick)  |</span><br><span class="line">+<span class="comment">---------+------------+----------------+</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>找出一个列中最高或者最低的值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_price <span class="keyword">from</span> products <span class="keyword">order</span> <span class="keyword">by</span> prod_price <span class="keyword">desc</span> <span class="keyword">limit</span> <span class="number">1</span>;</span><br><span class="line">+<span class="comment">------------+</span></span><br><span class="line">| prod_price |</span><br><span class="line">+<span class="comment">------------+</span></span><br><span class="line">|      55.00 |</span><br><span class="line">+<span class="comment">------------+</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><font color="red" face="微软雅黑">order by子句保证它位于from子句之后；如果使用limit，它必须位于order by子句之后</font></strong></p>
+<h4 id="0x03-过滤数据"><a href="#0x03-过滤数据" class="headerlink" title="0x03 过滤数据"></a>0x03 过滤数据</h4><h5 id="3-1-使用where子句"><a href="#3-1-使用where子句" class="headerlink" title="3.1 使用where子句"></a>3.1 使用where子句</h5><p>在select语句中，数据根据where子句中指定的搜索条件进行过滤。where子句在表名(from 子句)之后，给出</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name, prod_price <span class="keyword">from</span> products <span class="keyword">where</span> prod_price = <span class="number">2.50</span>;</span><br><span class="line">+<span class="comment">---------------+------------+</span></span><br><span class="line">| prod_name     | prod_price |</span><br><span class="line">+<span class="comment">---------------+------------+</span></span><br><span class="line">| Carrots       |       2.50 |</span><br><span class="line">| TNT (1 stick) |       2.50 |</span><br><span class="line">+<span class="comment">---------------+------------+</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><font color="red" face="微软雅黑">在同时使用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后， 否则将会产生错误</font></strong></p>
+<h5 id="3-2-使用where子句操作符"><a href="#3-2-使用where子句操作符" class="headerlink" title="3.2 使用where子句操作符"></a>3.2 使用where子句操作符</h5><table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">=</td>
+<td align="center">等于</td>
+</tr>
+<tr>
+<td align="center">&lt;&gt;</td>
+<td align="center">不等于</td>
+</tr>
+<tr>
+<td align="center">!=</td>
+<td align="center">不等于</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于等于</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于等于</td>
+</tr>
+<tr>
+<td align="center">BETWEEN</td>
+<td align="center">在指定的两个值之间</td>
+</tr>
+<tr>
+<td align="center">(1) 检查单个值</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name, prod_price <span class="keyword">from</span> products <span class="keyword">where</span> prod_name = <span class="string">'fuses'</span>;</span><br><span class="line">+<span class="comment">-----------+------------+</span></span><br><span class="line">| prod_name | prod_price |</span><br><span class="line">+<span class="comment">-----------+------------+</span></span><br><span class="line">| Fuses     |       3.42 |</span><br><span class="line">+<span class="comment">-----------+------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>mysql在执行匹配时默认不区分大小写。<br>(2) 列出价格小于10美元的所有产品</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name, prod_price <span class="keyword">from</span> products <span class="keyword">where</span> prod_price &lt; <span class="number">20</span>;</span><br><span class="line">+<span class="comment">----------------+------------+</span></span><br><span class="line">| prod_name      | prod_price |</span><br><span class="line">+<span class="comment">----------------+------------+</span></span><br><span class="line">| .5 ton anvil   |       5.99 |</span><br><span class="line">| 1 ton anvil    |       9.99 |</span><br><span class="line">| 2 ton anvil    |      14.99 |</span><br><span class="line">| Detonator      |      13.00 |</span><br><span class="line">| Bird seed      |      10.00 |</span><br><span class="line">| Carrots        |       2.50 |</span><br><span class="line">| Fuses          |       3.42 |</span><br><span class="line">| Oil can        |       8.99 |</span><br><span class="line">| Sling          |       4.49 |</span><br><span class="line">| TNT (1 stick)  |       2.50 |</span><br><span class="line">| TNT (5 sticks) |      10.00 |</span><br><span class="line">+<span class="comment">----------------+------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>(3) 不匹配检查<br>不是由供应商1003制造的所有产品：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> vend_id, prod_name <span class="keyword">from</span> products <span class="keyword">where</span> vend_id &lt;&gt; <span class="number">1003</span>;</span><br><span class="line"><span class="keyword">select</span> vend_id, prod_name <span class="keyword">from</span> products <span class="keyword">where</span> vend_id != <span class="number">1003</span>;</span><br><span class="line">+<span class="comment">---------+--------------+</span></span><br><span class="line">| vend_id | prod_name    |</span><br><span class="line">+<span class="comment">---------+--------------+</span></span><br><span class="line">|    1001 | .5 ton anvil |</span><br><span class="line">|    1001 | 1 ton anvil  |</span><br><span class="line">|    1001 | 2 ton anvil  |</span><br><span class="line">|    1002 | Fuses        |</span><br><span class="line">|    1005 | JetPack 1000 |</span><br><span class="line">|    1005 | JetPack 2000 |</span><br><span class="line">|    1002 | Oil can      |</span><br><span class="line">+<span class="comment">---------+--------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>(4) 范围检查<br>检索价格在5美元和10美元之间的所有产品：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name, prod_price <span class="keyword">from</span> products <span class="keyword">where</span> prod_price <span class="keyword">between</span> <span class="number">5</span> <span class="keyword">and</span> <span class="number">10</span>;</span><br><span class="line">+<span class="comment">----------------+------------+</span></span><br><span class="line">| prod_name      | prod_price |</span><br><span class="line">+<span class="comment">----------------+------------+</span></span><br><span class="line">| .5 ton anvil   |       5.99 |</span><br><span class="line">| 1 ton anvil    |       9.99 |</span><br><span class="line">| Bird seed      |      10.00 |</span><br><span class="line">| Oil can        |       8.99 |</span><br><span class="line">| TNT (5 sticks) |      10.00 |</span><br><span class="line">+<span class="comment">----------------+------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>(5) 控制检查<br>在创建表时，可以指定其中的列是否可以不包含值。在一个列不包含值时，称其为包含空值NULL。<br>检索客户email为null的客户id</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> cust_id <span class="keyword">from</span> customers <span class="keyword">where</span> cust_email <span class="keyword">is</span> <span class="literal">null</span>;</span><br><span class="line">+<span class="comment">---------+</span></span><br><span class="line">| cust_id |</span><br><span class="line">+<span class="comment">---------+</span></span><br><span class="line">|   10002 |</span><br><span class="line">|   10005 |</span><br><span class="line">+<span class="comment">---------+</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="0x04-数据过滤"><a href="#0x04-数据过滤" class="headerlink" title="0x04 数据过滤"></a>0x04 数据过滤</h4><h5 id="4-1-组合where子句"><a href="#4-1-组合where子句" class="headerlink" title="4.1 组合where子句"></a>4.1 组合where子句</h5><blockquote>
+<p>操作符(operator)用来联接或改变where子句中的子句的关键字。也称为逻辑操作符(logical operator)<br>(1) AND 操作符<br>检索满足所有给定条件的行。<br>检索由供应商1003制造且价格小于10美元的所有产品的名称和价格</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_id, prod_name, prod_price <span class="keyword">from</span> products <span class="keyword">where</span> vend_id = <span class="number">1003</span> <span class="keyword">and</span> prod_price &lt;= <span class="number">10</span>;</span><br><span class="line">+<span class="comment">---------+----------------+------------+</span></span><br><span class="line">| prod_id | prod_name      | prod_price |</span><br><span class="line">+<span class="comment">---------+----------------+------------+</span></span><br><span class="line">| FB      | Bird seed      |      10.00 |</span><br><span class="line">| FC      | Carrots        |       2.50 |</span><br><span class="line">| SLING   | Sling          |       4.49 |</span><br><span class="line">| TNT1    | TNT (1 stick)  |       2.50 |</span><br><span class="line">| TNT2    | TNT (5 sticks) |      10.00 |</span><br><span class="line">+<span class="comment">---------+----------------+------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>(2) OR操作符<br>检索匹配任一条件的行<br>检索由1002或者1003供应商制造的所有产品的产品名字和价格。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> vend_id, prod_name, prod_price <span class="keyword">from</span> products <span class="keyword">where</span> vend_id=<span class="number">1002</span> <span class="keyword">or</span> vend_id=<span class="number">1003</span>;</span><br><span class="line">+<span class="comment">---------+----------------+------------+</span></span><br><span class="line">| vend_id | prod_name      | prod_price |</span><br><span class="line">+<span class="comment">---------+----------------+------------+</span></span><br><span class="line">|    1003 | Detonator      |      13.00 |</span><br><span class="line">|    1003 | Bird seed      |      10.00 |</span><br><span class="line">|    1003 | Carrots        |       2.50 |</span><br><span class="line">|    1002 | Fuses          |       3.42 |</span><br><span class="line">|    1002 | Oil can        |       8.99 |</span><br><span class="line">|    1003 | Safe           |      50.00 |</span><br><span class="line">|    1003 | Sling          |       4.49 |</span><br><span class="line">|    1003 | TNT (1 stick)  |       2.50 |</span><br><span class="line">|    1003 | TNT (5 sticks) |      10.00 |</span><br><span class="line">+<span class="comment">---------+----------------+------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>(3) 计算次序<br>AND的优先级要高于OR操作符，所以，如果sql语句为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> products <span class="keyword">where</span> vend_id=<span class="number">1002</span> <span class="keyword">or</span> vend_id=<span class="number">1003</span> <span class="keyword">and</span> prod_price &gt;= <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>结果将会出现，price低于10美元的产品<br>正确的做法是，加上括号</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> products <span class="keyword">where</span> (vend_id=<span class="number">1002</span> <span class="keyword">or</span> vend_id=<span class="number">1003</span>) <span class="keyword">and</span> prod_price &gt;= <span class="number">10</span>;</span><br><span class="line">+<span class="comment">---------+---------+----------------+------------+-------------------------------------------------+</span></span><br><span class="line">| prod_id | vend_id | prod_name      | prod_price | prod_desc                                       |</span><br><span class="line">+<span class="comment">---------+---------+----------------+------------+-------------------------------------------------+</span></span><br><span class="line">| DTNTR   |    1003 | Detonator      |      13.00 | Detonator (plunger powered), fuses not included |</span><br><span class="line">| FB      |    1003 | Bird seed      |      10.00 | Large bag (suitable for road runners)           |</span><br><span class="line">| SAFE    |    1003 | Safe           |      50.00 | Safe <span class="keyword">with</span> combination <span class="keyword">lock</span>                      |</span><br><span class="line">| TNT2    |    <span class="number">1003</span> | TNT (<span class="number">5</span> sticks) |      <span class="number">10.00</span> | TNT, red, pack <span class="keyword">of</span> <span class="number">10</span> sticks                     |</span><br><span class="line">+<span class="comment">---------+---------+----------------+------------+-------------------------------------------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>(4) IN操作符</p>
+<blockquote>
+<p>IN操作符用来指定条件范围，范围中的每个条件都可以进行匹配。 IN取合法值的由逗号分隔的清单，全都括在圆括号中</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name, prod_price <span class="keyword">from</span> products <span class="keyword">where</span> vend_id <span class="keyword">in</span> (<span class="number">1002</span>, <span class="number">1003</span>) <span class="keyword">order</span> <span class="keyword">by</span> prod_name;</span><br><span class="line">+<span class="comment">----------------+------------+</span></span><br><span class="line">| prod_name      | prod_price |</span><br><span class="line">+<span class="comment">----------------+------------+</span></span><br><span class="line">| Bird seed      |      10.00 |</span><br><span class="line">| Carrots        |       2.50 |</span><br><span class="line">| Detonator      |      13.00 |</span><br><span class="line">| Fuses          |       3.42 |</span><br><span class="line">| Oil can        |       8.99 |</span><br><span class="line">| Safe           |      50.00 |</span><br><span class="line">| Sling          |       4.49 |</span><br><span class="line">| TNT (1 stick)  |       2.50 |</span><br><span class="line">| TNT (5 sticks) |      10.00 |</span><br><span class="line">+<span class="comment">----------------+------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">```sql</span><br><span class="line">select prod_name, prod_price from products where vend_id = 1002 or vend_id = 1003 order by prod_name;</span><br><span class="line">+----------------+------------+</span><br><span class="line">| prod_name      | prod_price |</span><br><span class="line">+----------------+------------+</span><br><span class="line">| Bird seed      |      10.00 |</span><br><span class="line">| Carrots        |       2.50 |</span><br><span class="line">| Detonator      |      13.00 |</span><br><span class="line">| Fuses          |       3.42 |</span><br><span class="line">| Oil can        |       8.99 |</span><br><span class="line">| Safe           |      50.00 |</span><br><span class="line">| Sling          |       4.49 |</span><br><span class="line">| TNT (1 stick)  |       2.50 |</span><br><span class="line">| TNT (5 sticks) |      10.00 |</span><br><span class="line">+----------------+------------+</span><br></pre></td></tr></table></figure></p>
+<p>使用in操作符的优点：</p>
+<ul>
+<li>在使用长的合法选项清单时，IN操作符更清楚更直观。</li>
+<li>在使用IN时，计算的次序更容易管理(因为使用的操作符更少)。</li>
+<li>IN操作符一般比OR操作符清单执行更快。</li>
+<li>IN的最大优点是可以包含其他select语句，使得能够更动态地建立where子句。<br>(5) NOT操作符<blockquote>
+<p>否定它之后所跟的任何条件<br>列出除了1003和1002之外的所有供应商制造的产品。可编写如下的代码：</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name, prod_price <span class="keyword">from</span> products <span class="keyword">where</span> vend_id <span class="keyword">not</span> <span class="keyword">in</span> (<span class="number">1003</span>, <span class="number">1002</span>) <span class="keyword">order</span> <span class="keyword">by</span> prod_name;</span><br><span class="line">+<span class="comment">--------------+------------+</span></span><br><span class="line">| prod_name    | prod_price |</span><br><span class="line">+<span class="comment">--------------+------------+</span></span><br><span class="line">| .5 ton anvil |       5.99 |</span><br><span class="line">| 1 ton anvil  |       9.99 |</span><br><span class="line">| 2 ton anvil  |      14.99 |</span><br><span class="line">| JetPack 1000 |      35.00 |</span><br><span class="line">| JetPack 2000 |      55.00 |</span><br><span class="line">+<span class="comment">--------------+------------+</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="0x05-用通配符进行过滤"><a href="#0x05-用通配符进行过滤" class="headerlink" title="0x05 用通配符进行过滤"></a>0x05 用通配符进行过滤</h4><blockquote>
+<p>通配符 用来匹配值的一部分的特殊字符，例如：百分号通配符、下划线通配符等。</p>
+</blockquote>
+<p>为在搜索子句中使用通配符，必须使用LIKE操作符。LIKE指示MySQL，后跟的搜索模式利用通配符匹配而不是直接相等匹配进行比较。</p>
+<h5 id="5-1-百分号-通配符"><a href="#5-1-百分号-通配符" class="headerlink" title="5.1 百分号(%)通配符"></a>5.1 百分号(%)通配符</h5><blockquote>
+<p>%表示任何字符出现任意次数</p>
+</blockquote>
+<p>(1) 找到所有以jet开头的产品</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_id, prod_name <span class="keyword">from</span> products <span class="keyword">where</span> prod_name <span class="keyword">like</span> <span class="string">'jet%'</span>;</span><br><span class="line">+<span class="comment">---------+--------------+</span></span><br><span class="line">| prod_id | prod_name    |</span><br><span class="line">+<span class="comment">---------+--------------+</span></span><br><span class="line">| JP1000  | JetPack 1000 |</span><br><span class="line">| JP2000  | JetPack 2000 |</span><br><span class="line">+<span class="comment">---------+--------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>(2) 匹配任何位置包含文本anvil的值，不论它之前或之后出现什么字符</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name <span class="keyword">from</span> products <span class="keyword">where</span> prod_name <span class="keyword">like</span> <span class="string">"%anvil%"</span>;</span><br><span class="line">+<span class="comment">--------------+</span></span><br><span class="line">| prod_name    |</span><br><span class="line">+<span class="comment">--------------+</span></span><br><span class="line">| .5 ton anvil |</span><br><span class="line">| 1 ton anvil  |</span><br><span class="line">| 2 ton anvil  |</span><br><span class="line">+<span class="comment">--------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>(3) 找出以s开头以e结尾的所有产品</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name <span class="keyword">from</span> products <span class="keyword">where</span> prod_name <span class="keyword">like</span> <span class="string">'s%e'</span>;</span><br><span class="line">+<span class="comment">-----------+</span></span><br><span class="line">| prod_name |</span><br><span class="line">+<span class="comment">-----------+</span></span><br><span class="line">| Safe      |</span><br><span class="line">+<span class="comment">-----------+</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="5-2-下划线-通配符"><a href="#5-2-下划线-通配符" class="headerlink" title="5.2 下划线(_)通配符"></a>5.2 下划线(_)通配符</h5><blockquote>
+<p>下划线只匹配单个字符而不是多个字符</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_id, prod_name <span class="keyword">from</span> products <span class="keyword">where</span> prod_name <span class="keyword">like</span> <span class="string">'_ ton anvil'</span>;</span><br><span class="line">+<span class="comment">---------+-------------+</span></span><br><span class="line">| prod_id | prod_name   |</span><br><span class="line">+<span class="comment">---------+-------------+</span></span><br><span class="line">| ANV02   | 1 ton anvil |</span><br><span class="line">| ANV03   | 2 ton anvil |</span><br><span class="line">+<span class="comment">---------+-------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>总结：</p>
+<ul>
+<li>不要过度使用通配符。如果其他操作符能达到相同的目的，应该使用其他操作符。</li>
+<li>在确定需要使用通配符时，除非绝对有必要，否则不要把它们用在搜索模式的开始处。把通配符置于搜索模式的开始处，搜索起来时最慢的</li>
+<li>仔细注意通配符的位置。如果放错地方，可能不会返回想要的数据</li>
+</ul>
+<h4 id="0x06-用正则表达式进行搜索"><a href="#0x06-用正则表达式进行搜索" class="headerlink" title="0x06 用正则表达式进行搜索"></a>0x06 用正则表达式进行搜索</h4>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/sql基础知识/" rel="tag"># sql基础知识</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/08/常见git操作汇总/" rel="next" title="常见git操作汇总">
+                  <i class="fa fa-chevron-left"></i> 常见git操作汇总
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/11/排序算法总结/" rel="prev" title="排序算法总结">
+                  排序算法总结 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x01-检索数据"><span class="nav-number">1.</span> <span class="nav-text">0x01 检索数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-检索不同的行，即输出的子段不重复"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 检索不同的行，即输出的子段不重复</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-限制结果"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 限制结果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-使用完全限定的表名"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 使用完全限定的表名</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x02-排序检索数据"><span class="nav-number">2.</span> <span class="nav-text">0x02 排序检索数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-排序数据"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 排序数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-按照多个列排序"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 按照多个列排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-指定排序方向"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 指定排序方向</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x03-过滤数据"><span class="nav-number">3.</span> <span class="nav-text">0x03 过滤数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-使用where子句"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 使用where子句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-使用where子句操作符"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 使用where子句操作符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x04-数据过滤"><span class="nav-number">4.</span> <span class="nav-text">0x04 数据过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-组合where子句"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 组合where子句</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x05-用通配符进行过滤"><span class="nav-number">5.</span> <span class="nav-text">0x05 用通配符进行过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-百分号-通配符"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 百分号(%)通配符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-下划线-通配符"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 下划线(_)通配符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x06-用正则表达式进行搜索"><span class="nav-number">6.</span> <span class="nav-text">0x06 用正则表达式进行搜索</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">justnow</p>
+  <div class="site-description motion-element" itemprop="description">学习·生活·记录</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">justnow</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
