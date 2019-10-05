@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="justn0w的Blog">
 <meta property="og:description" content="mysql必知必会，读书笔记！">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-11T05:59:38.732Z">
+<meta property="og:updated_time" content="2019-09-12T06:50:34.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sql学习知识汇总01">
 <meta name="twitter:description" content="mysql必知必会，读书笔记！">
@@ -264,7 +264,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-11 13:59:38" itemprop="dateModified" datetime="2019-09-11T13:59:38+08:00">2019-09-11</time>
+                <time title="修改时间：2019-09-12 14:50:34" itemprop="dateModified" datetime="2019-09-12T14:50:34+08:00">2019-09-12</time>
               </span>
             
           
@@ -465,7 +465,93 @@
 <li>在确定需要使用通配符时，除非绝对有必要，否则不要把它们用在搜索模式的开始处。把通配符置于搜索模式的开始处，搜索起来时最慢的</li>
 <li>仔细注意通配符的位置。如果放错地方，可能不会返回想要的数据</li>
 </ul>
-<h4 id="0x06-用正则表达式进行搜索"><a href="#0x06-用正则表达式进行搜索" class="headerlink" title="0x06 用正则表达式进行搜索"></a>0x06 用正则表达式进行搜索</h4>
+<h4 id="0x06-用正则表达式进行搜索"><a href="#0x06-用正则表达式进行搜索" class="headerlink" title="0x06 用正则表达式进行搜索"></a>0x06 用正则表达式进行搜索</h4><h5 id="6-1-基本的字符匹配"><a href="#6-1-基本的字符匹配" class="headerlink" title="6.1 基本的字符匹配"></a>6.1 基本的字符匹配</h5><p>一个简单的正则表达式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name <span class="keyword">from</span> products <span class="keyword">where</span> prod_name REGEXP <span class="string">'.000'</span> <span class="keyword">order</span> <span class="keyword">by</span> prod_name</span><br><span class="line">+<span class="comment">--------------+</span></span><br><span class="line">| prod_name    |</span><br><span class="line">+<span class="comment">--------------+</span></span><br><span class="line">| JetPack <span class="number">1000</span> |</span><br><span class="line">| JetPack <span class="number">2000</span> |</span><br><span class="line">+<span class="comment">--------------+</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><figcaption><span>表示匹配任意一个字符。因此1000和2000都匹配且返回。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">like和regexp的区别是：</span><br><span class="line">* LIKE匹配整个列。如果被匹配的文本在列值中出现，like将不会找到它，相应的行也不被返回(除非使用通配符)</span><br><span class="line">* REGEXP在列值内进行匹配，如果被匹配的文本在列值中出现，REGEXP将会找到它，相应的行将被返回。</span><br><span class="line">##### 6.2 进行OR匹配</span><br><span class="line">为了搜索两个串之一，使用|</span><br><span class="line">```sql</span><br><span class="line">select prod_name from products where prod_name regexp &apos;1000|2000&apos; order by prod_name;</span><br><span class="line">+--------------+</span><br><span class="line">| prod_name    |</span><br><span class="line">+--------------+</span><br><span class="line">| JetPack 1000 |</span><br><span class="line">| JetPack 2000 |</span><br><span class="line">+--------------+</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-3-匹配几个字符之一"><a href="#6-3-匹配几个字符之一" class="headerlink" title="6.3 匹配几个字符之一"></a>6.3 匹配几个字符之一</h5><p>[123]匹配1或2或3</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name <span class="keyword">from</span> products <span class="keyword">where</span> prod_name regexp <span class="string">'[123] ton'</span> <span class="keyword">order</span> <span class="keyword">by</span> prod_name;</span><br><span class="line">+<span class="comment">-------------+</span></span><br><span class="line">| prod_name   |</span><br><span class="line">+<span class="comment">-------------+</span></span><br><span class="line">| 1 ton anvil |</span><br><span class="line">| 2 ton anvil |</span><br><span class="line">+<span class="comment">-------------+</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="6-4-匹配范围"><a href="#6-4-匹配范围" class="headerlink" title="6.4 匹配范围"></a>6.4 匹配范围</h5><p>[0-9]匹配数字0到9；<br>[a-z]匹配字母a到9；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name <span class="keyword">from</span> products <span class="keyword">where</span> prod_name regexp <span class="string">'[1-5] Ton'</span> <span class="keyword">order</span> <span class="keyword">by</span> prod_name;</span><br><span class="line">+<span class="comment">--------------+</span></span><br><span class="line">| prod_name    |</span><br><span class="line">+<span class="comment">--------------+</span></span><br><span class="line">| .5 ton anvil |</span><br><span class="line">| 1 ton anvil  |</span><br><span class="line">| 2 ton anvil  |</span><br><span class="line">+<span class="comment">--------------+</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="6-5-匹配特殊字符"><a href="#6-5-匹配特殊字符" class="headerlink" title="6.5 匹配特殊字符"></a>6.5 匹配特殊字符</h5><p>为了匹配特殊字符，需要用\为前导。\-表示查找-，\.表示查找.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> vend_name <span class="keyword">from</span> vendors <span class="keyword">where</span> vend_name regexp <span class="string">'\\.'</span> <span class="keyword">order</span> <span class="keyword">by</span> vend_name;</span><br><span class="line">+<span class="comment">--------------+</span></span><br><span class="line">| vend_name    |</span><br><span class="line">+<span class="comment">--------------+</span></span><br><span class="line">| Furball Inc. |</span><br><span class="line">+<span class="comment">--------------+</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="6-6-匹配字符类"><a href="#6-6-匹配字符类" class="headerlink" title="6.6 匹配字符类"></a>6.6 匹配字符类</h5><table>
+<thead>
+<tr>
+<th align="center">类</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">[:alnum:]</td>
+<td align="center">任意字母和数字（同[a-zA-Z0-9]）</td>
+</tr>
+<tr>
+<td align="center">[:alpha:]</td>
+<td align="center">任意字符（同[a-zA-Z]）</td>
+</tr>
+<tr>
+<td align="center">[:blank:]</td>
+<td align="center">空格和制表（同[\t]）</td>
+</tr>
+<tr>
+<td align="center">[:cntrl:]</td>
+<td align="center">ASCII控制字符（ ASCII 0到31和127）</td>
+</tr>
+<tr>
+<td align="center">[:digit:]</td>
+<td align="center">任意数字（同[0-9]）</td>
+</tr>
+<tr>
+<td align="center">[:graph:]</td>
+<td align="center">与[:print:]相同，但不包括空格</td>
+</tr>
+<tr>
+<td align="center">[:lower:]</td>
+<td align="center">任意小写字母（同[a-z]）</td>
+</tr>
+<tr>
+<td align="center">[:print:]</td>
+<td align="center">任意可打印字符</td>
+</tr>
+<tr>
+<td align="center">[:punct:]</td>
+<td align="center">既不在[:alnum:]又不在[:cntrl:]中的任意字符</td>
+</tr>
+<tr>
+<td align="center">[:space:]</td>
+<td align="center">包括空格在内的任意空白字符（同[\f\n\r\t\v]）</td>
+</tr>
+<tr>
+<td align="center">[:upper:]</td>
+<td align="center">任意大写字母（同[A-Z]）</td>
+</tr>
+<tr>
+<td align="center">[:xdigit:]</td>
+<td align="center">任意十六进制数字（同[a-fA-F0-9]）</td>
+</tr>
+<tr>
+<td align="center">##### 6.7 匹配多个实例</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">比如，寻找一个单词并且还能够适应一个尾随的s(如果存在)</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> prod_name <span class="keyword">from</span> products <span class="keyword">where</span> prod_name regexp <span class="string">'\\([0-9] sticks?\\)'</span>;</span><br><span class="line">+<span class="comment">----------------+</span></span><br><span class="line">| prod_name      |</span><br><span class="line">+<span class="comment">----------------+</span></span><br><span class="line">| TNT (1 stick)  |</span><br><span class="line">| TNT (5 sticks) |</span><br><span class="line">+<span class="comment">----------------+</span></span><br></pre></td></tr></table></figure></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>其中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">下标是正则表达式重复元字符</span><br><span class="line">|元字符|说明|</span><br><span class="line">|:--:|:--:|</span><br><span class="line">|* |0个或多个匹配|</span><br><span class="line">|+ |1个或多个匹配（等于&#123;1,&#125;）|</span><br><span class="line">|? |0个或1个匹配（等于&#123;0,1&#125;）|</span><br><span class="line">|&#123;n&#125; |指定数目的匹配|</span><br><span class="line">|&#123;n,&#125; |不少于指定数目的匹配|</span><br><span class="line">|&#123;n,m&#125; |匹配数目的范围（ m不超过255）|</span><br><span class="line"></span><br><span class="line">```sql</span><br><span class="line">select prod_name from products where prod_name regexp &apos;[[:digit:]]&#123;4&#125;&apos; order by prod_name;</span><br><span class="line">+--------------+</span><br><span class="line">| prod_name    |</span><br><span class="line">+--------------+</span><br><span class="line">| JetPack 1000 |</span><br><span class="line">| JetPack 2000 |</span><br><span class="line">+--------------+</span><br></pre></td></tr></table></figure></p>
+<h5 id="6-8-定位符"><a href="#6-8-定位符" class="headerlink" title="6.8 定位符"></a>6.8 定位符</h5><p>为了匹配特定位置的文本，需要使用下表中的定位符<br>|元字符|说明|<br>|:–:|:–:|<br>|^ |文本的开始|<br>|$ |文本的结尾|<br>|[[:&lt;:]] |词的开始|<br>|[[:&gt;:]] |词的结尾|</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">找出以一个数(包括以小数点开始的数)开始的所有产品。</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> prod_name <span class="keyword">from</span> products <span class="keyword">where</span> prod_name regexp <span class="string">'^[0-9\\.]'</span> <span class="keyword">order</span> <span class="keyword">by</span> prod_name;</span><br><span class="line"></span><br><span class="line">+<span class="comment">--------------+</span></span><br><span class="line">| prod_name    |</span><br><span class="line">+<span class="comment">--------------+</span></span><br><span class="line">| .5 ton anvil |</span><br><span class="line">| 1 ton anvil  |</span><br><span class="line">| 2 ton anvil  |</span><br><span class="line">+<span class="comment">--------------+</span></span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -551,7 +637,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x01-检索数据"><span class="nav-number">1.</span> <span class="nav-text">0x01 检索数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-检索不同的行，即输出的子段不重复"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 检索不同的行，即输出的子段不重复</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-限制结果"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 限制结果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-使用完全限定的表名"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 使用完全限定的表名</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x02-排序检索数据"><span class="nav-number">2.</span> <span class="nav-text">0x02 排序检索数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-排序数据"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 排序数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-按照多个列排序"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 按照多个列排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-指定排序方向"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 指定排序方向</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x03-过滤数据"><span class="nav-number">3.</span> <span class="nav-text">0x03 过滤数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-使用where子句"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 使用where子句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-使用where子句操作符"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 使用where子句操作符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x04-数据过滤"><span class="nav-number">4.</span> <span class="nav-text">0x04 数据过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-组合where子句"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 组合where子句</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x05-用通配符进行过滤"><span class="nav-number">5.</span> <span class="nav-text">0x05 用通配符进行过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-百分号-通配符"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 百分号(%)通配符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-下划线-通配符"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 下划线(_)通配符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x06-用正则表达式进行搜索"><span class="nav-number">6.</span> <span class="nav-text">0x06 用正则表达式进行搜索</span></a></li></ol></div>
+          <div class="post-toc"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x01-检索数据"><span class="nav-number">1.</span> <span class="nav-text">0x01 检索数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-检索不同的行，即输出的子段不重复"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 检索不同的行，即输出的子段不重复</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-限制结果"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 限制结果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-使用完全限定的表名"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 使用完全限定的表名</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x02-排序检索数据"><span class="nav-number">2.</span> <span class="nav-text">0x02 排序检索数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-排序数据"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 排序数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-按照多个列排序"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 按照多个列排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-指定排序方向"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 指定排序方向</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x03-过滤数据"><span class="nav-number">3.</span> <span class="nav-text">0x03 过滤数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-使用where子句"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 使用where子句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-使用where子句操作符"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 使用where子句操作符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x04-数据过滤"><span class="nav-number">4.</span> <span class="nav-text">0x04 数据过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-组合where子句"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 组合where子句</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x05-用通配符进行过滤"><span class="nav-number">5.</span> <span class="nav-text">0x05 用通配符进行过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-百分号-通配符"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 百分号(%)通配符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-下划线-通配符"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 下划线(_)通配符</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x06-用正则表达式进行搜索"><span class="nav-number">6.</span> <span class="nav-text">0x06 用正则表达式进行搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-1-基本的字符匹配"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 基本的字符匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-3-匹配几个字符之一"><span class="nav-number">6.2.</span> <span class="nav-text">6.3 匹配几个字符之一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-4-匹配范围"><span class="nav-number">6.3.</span> <span class="nav-text">6.4 匹配范围</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-5-匹配特殊字符"><span class="nav-number">6.4.</span> <span class="nav-text">6.5 匹配特殊字符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-6-匹配字符类"><span class="nav-number">6.5.</span> <span class="nav-text">6.6 匹配字符类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-8-定位符"><span class="nav-number">6.6.</span> <span class="nav-text">6.8 定位符</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -567,7 +653,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
